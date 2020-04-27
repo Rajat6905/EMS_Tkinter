@@ -15,20 +15,21 @@ class MyFirstGUI:
         
     def mainWindow(self):
         self.master.geometry("1000x600")    
-        self.master.title("Main Frame")
+        self.master.title("Employee Management System")
         bar=tk.Menu(self.master)
         fileMenu = tk.Menu(bar ,tearoff =0)
-        fileMenu.add_command(label="Add Users",command=lambda:self.manage_users())
-        fileMenu.add_command(label="Search User",command=lambda:self.search_user_ui())
-        fileMenu.add_command(label="View User",command=lambda:self.view_user())
-        fileMenu.add_command(label="Delete User",command=lambda:self.delete_ui())
-        fileMenu.add_command(label="Edit User",command=lambda:self.edit_ui())
+        fileMenu.add_command(label="Add Users",font=('arial', 14),command=lambda:self.manage_users())
+        fileMenu.add_command(label="Search User",font=('arial', 14),command=lambda:self.search_user_ui())
+        fileMenu.add_command(label="View User",font=('arial', 14),command=lambda:self.view_user())
+        fileMenu.add_command(label="Delete User",font=('arial', 14),command=lambda:self.delete_ui())
+        fileMenu.add_command(label="Edit User",font=('arial', 14),command=lambda:self.edit_ui())
+
+        bar.add_cascade(label="Manage Users",font=('arial', 14),menu=fileMenu)
         
-        bar.add_cascade(label="Manage Users",menu=fileMenu)
         reportMenu=tk.Menu(bar,tearoff=0)
-        reportMenu.add_cascade(label="User Reports",command=lambda:self.table())
-        bar.add_cascade(label="Reports",menu=reportMenu)
-        bar.add_command(label="Exit",command=self.logout)
+        reportMenu.add_command(label="User Reports",font=('arial', 14),command=lambda:self.table())
+        bar.add_cascade(label="Reports",font=('arial', 14),menu=reportMenu)
+        bar.add_command(label="Exit",font=('arial', 14),command=self.logout)
         self.master.config(menu=bar)
     def manage_users(self):
         for obj in self.master.winfo_children():
@@ -45,12 +46,12 @@ class MyFirstGUI:
         tk.Label(self.master, text="User Status ").grid(row=7,pady=10)
         self.id=tk.Label(self.master,text=main.returnid())
         self.id.grid(row=2, column=2)
-        self.name = tk.Entry(self.master)
+        self.name = tk.Entry(self.master,width=20, font=('arial', 12))
         self.name.grid(row=3, column=2)
-        self.password = tk.Entry(self.master)
+        self.password = tk.Entry(self.master,width=20, font=('arial', 12))
         self.password.grid(row=4, column=2)
         
-        self.confirm_password = tk.Entry(self.master)
+        self.confirm_password = tk.Entry(self.master,width=20, font=('arial', 12))
         self.confirm_password.grid(row=5, column=2)
         
         self.v = tk.IntVar()
@@ -68,16 +69,16 @@ class MyFirstGUI:
         tk.Label(self.master, text="DOB ").grid(row=10,pady=10)
         tk.Label(self.master, text="Email ").grid(row=11,pady=10)
         
-        self.contact = tk.Entry(self.master)
+        self.contact = tk.Entry(self.master,width=20, font=('arial', 12))
         self.contact.grid(row=9, column=2)
         
-        self.DOB=tk.Entry(self.master)
+        self.DOB=tk.Entry(self.master,width=20, font=('arial', 12))
         self.DOB.grid(row=10,column=2)
         
-        self.email=tk.Entry(self.master)
+        self.email=tk.Entry(self.master,width=20, font=('arial', 12))
         self.email.grid(row=11,column=2)
         tk.Button(self.master, text='Save',
-                  command=lambda:self.addButton()).grid(row=14,column=1,padx=20 )
+                  command=lambda:self.addButton(),height=2).grid(row=14,column=1,padx=20,pady=20 )
         
     
     def add(self):
@@ -157,8 +158,8 @@ class MyFirstGUI:
             tk.Label(self.master, text=_users[i][4]).grid(row=7,column=2,pady=6)
             tk.Label(self.master, text=_users[i][5]).grid(row=8,column=2,pady=6)
             tk.Label(self.master, text=_users[i][6]).grid(row=9,column=2,pady=6)
-            tk.Button(self.master, text='Prev <<',command=lambda:self.view_user(i-1)).grid(row=11,column=2,pady=6)
-            tk.Button(self.master, text="Edit ",command=lambda:self.editbtn(_users[i][0])).grid(row=12,column=2,pady=6)
+            tk.Button(self.master, text='Prev <<',command=lambda:self.view_user(i-1),height=2).grid(row=11,column=2,pady=20,padx=20)
+            tk.Button(self.master, text="Edit ",command=lambda:self.editbtn(_users[i][0]),height=2).grid(row=12,column=2,pady=20,padx=20)
         
         elif i>0:
             self.mm()
@@ -169,9 +170,9 @@ class MyFirstGUI:
             tk.Label(self.master, text=_users[i][4]).grid(row=7,column=2,pady=6)
             tk.Label(self.master, text=_users[i][5]).grid(row=8,column=2,pady=6)
             tk.Label(self.master, text=_users[i][6]).grid(row=9,column=2,pady=6)
-            tk.Button(self.master, text='Next >>',command=lambda:self.view_user(i+1)).grid(row=11 ,column=1,pady=6)
-            tk.Button(self.master, text='Prev <<',command=lambda:self.view_user(i-1)).grid(row=11,column=2,pady=6)
-            tk.Button(self.master, text="Edit ",command=lambda:self.editbtn(_users[i][0])).grid(row=12,column=2,pady=6)
+            tk.Button(self.master, text='Next >>',command=lambda:self.view_user(i+1),height=2).grid(row=11 ,column=1,pady=20,padx=20)
+            tk.Button(self.master, text='Prev <<',command=lambda:self.view_user(i-1),height=2).grid(row=11,column=2,pady=20,padx=20)
+            tk.Button(self.master, text="Edit ",command=lambda:self.editbtn(_users[i][0]),height=2).grid(row=12,column=2,pady=6)
         else:
             self.mm()
             tk.Label(self.master, text=_users[i][0]).grid(row=3,column=2,pady=6)
@@ -181,8 +182,8 @@ class MyFirstGUI:
             tk.Label(self.master, text=_users[i][4]).grid(row=7,column=2,pady=6)
             tk.Label(self.master, text=_users[i][5]).grid(row=8,column=2,pady=6)
             tk.Label(self.master, text=_users[i][6]).grid(row=9,column=2,pady=6)
-            tk.Button(self.master, text='Next >>',command=lambda:self.view_user(i+1)).grid(row=11,column=1,pady=6)
-            tk.Button(self.master, text="Edit ",command=lambda:self.editbtn(_users[i][0])).grid(row=12,column=2,pady=6)
+            tk.Button(self.master, text='Next >>',command=lambda:self.view_user(i+1),height=2).grid(row=11,column=1,pady=6)
+            tk.Button(self.master, text="Edit ",command=lambda:self.editbtn(_users[i][0]),height=2).grid(row=12,column=2,pady=6)
     
     
     def delete_ui(self):
@@ -192,7 +193,7 @@ class MyFirstGUI:
         self.mainWindow()
          
         tk.Label(self.master,text="User Id").grid(row=0,padx=10,pady=20)
-        self.del_id=tk.Entry(self.master)
+        self.del_id=tk.Entry(self.master,width=20, font=('arial', 12))
         self.del_id.grid(row=0, column=2)
         self.del_id.bind('<Return>',self.delete)
         
@@ -219,7 +220,7 @@ class MyFirstGUI:
          tk.Label(self.master, text="Contact ").grid(row=6,pady=10)
          tk.Label(self.master, text="DOB ").grid(row=7,pady=10)
          tk.Label(self.master, text="Email").grid(row=8,pady=10)
-         self.search_id = tk.Entry(self.master)
+         self.search_id = tk.Entry(self.master,width=20, font=('arial', 12))
          self.search_id.grid(row=0, column=2)
          self.search_id.bind('<Return>',self.search)
     def editbtn(self,i):
@@ -233,14 +234,14 @@ class MyFirstGUI:
         self.mainWindow()
         if u_id !=None:
         
-           self.del_id = tk.Entry(self.master)
+           self.del_id = tk.Entry(self.master,width=20, font=('arial', 12))
            self.del_id.grid(row=0, column=3)
            self.del_id.insert("end",u_id)
            self.edit_info()
            
            
         else:
-            self.del_id = tk.Entry(self.master)
+            self.del_id = tk.Entry(self.master,width=20, font=('arial', 12))
             
             self.del_id.grid(row=0, column=3)
             self.edit_user_i()
@@ -275,28 +276,24 @@ class MyFirstGUI:
         tk.Label(self.master, text="DOB ").grid(row=5,pady=10)
         tk.Label(self.master, text="Email").grid(row=6,pady=10)
         tk.Button(self.master, text='Save',
-                     command=lambda:self.update()).grid(row=7,column=1,padx=20 )
+                     command=lambda:self.update(),height=2).grid(row=7,column=1,padx=20 )
         self.u_s = tk.IntVar()
         self.u_s.set(1)
         tk.Radiobutton(root, text="Active", variable=self.u_s, value=1).grid(row=3,column=3)
         tk.Radiobutton(root, text="Inactive", variable=self.u_s, value=2).grid(row=3,column=4)
         
-        self.name_=tk.Entry(self.master)
+        self.name_=tk.Entry(self.master,width=20, font=('arial', 12))
         self.name_.grid(row=2,column=3)
-        self.contact_=tk.Entry(self.master)
+        self.contact_=tk.Entry(self.master,width=20, font=('arial', 12))
         self.contact_.grid(row=4,column=3)
-        self.dob_=tk.Entry(self.master)
+        self.dob_=tk.Entry(self.master,width=20, font=('arial', 12))
         self.dob_.grid(row=5,column=3)
-        self.email_=tk.Entry(self.master)
+        self.email_=tk.Entry(self.master,width=20, font=('arial', 12))
         self.email_.grid(row=6,column=3)
         
     def edit_info(self):
         self.edit_user_i()
-            
-        
-            
-        
-        
+    
         d_id=self.del_id.get()
         if main.search(d_id):
             val=main.search(self.del_id.get())
@@ -358,17 +355,17 @@ class MyFirstGUI:
         self.master.destroy()
     
     def login(self):
-        top.geometry("400x200")
+        top.geometry("500x250")
         top.title("Login")
-        tk.Label(self.top, text="User ID").grid(row=0,padx=30,pady=20)
-        tk.Label(self.top, text="Password").grid(row=1,padx=30,pady=20)
+        tk.Label(self.top, text="User ID",width=20, font=('arial', 12)).grid(row=0,padx=30,pady=20)
+        tk.Label(self.top, text="Password",width=20, font=('arial', 12)).grid(row=1,padx=30,pady=20)
         
-        self.e1 = tk.Entry(self.top)
-        self.e2 = tk.Entry(self.top,show='*')
+        self.e1 = tk.Entry(self.top,width=20, font=('arial', 12))
+        self.e2 = tk.Entry(self.top,show='*',width=20, font=('arial', 12))
         self.e1.grid(row=0, column=1)
         self.e2.grid(row=1, column=1)
-        tk.Button(self.top, text='Quit', command=lambda:self.command2()).grid(row=3,column=0 )
-        tk.Button(self.top, text='Login', command=lambda:self._login_btn_clicked()).grid(row=3,column=1,padx=20 )
+        tk.Button(self.top, text='Quit', command=lambda:self.command2(),height=2).grid(row=5,column=0,padx=30)
+        tk.Button(self.top, text='Login', command=lambda:self._login_btn_clicked(),height=2).grid(row=5,column=1,pady=30 )
     def _login_btn_clicked(self):
         obj3=emp()
         obj3.setId(self.e1.get())
@@ -397,6 +394,7 @@ class MyFirstGUI:
         self.top.destroy() 
         self.master.destroy()
     def table(self):
+        print("table")
         for obj in self.master.winfo_children():
             obj.destroy()
         self.mainWindow()
@@ -416,8 +414,8 @@ class MyFirstGUI:
             self.treeview.insert("",index,  text=index, values=(dat[0], dat[1],dat[3],dat[4],dat[5],dat[6]))
         
         
-        tk.Button(self.master, text='Save as CSV', command=lambda:self.savecsv()).grid(row=14,column=0,padx=20 )
-        tk.Button(self.master, text='Save as Pdf', command=lambda:self.savepdf()).grid(row=12,column=0,padx=20 )
+        tk.Button(self.master, text='Save as CSV', command=lambda:self.savecsv(),height=2).grid(row=14,column=0,padx=20,pady=10 )
+        tk.Button(self.master, text='Save as Pdf', command=lambda:self.savepdf(),height=2).grid(row=12,column=0,padx=20,pady=10 )
         
     def savecsv(self):
         data=main.all_user()
@@ -445,6 +443,7 @@ class MyFirstGUI:
         pdf.ln(0.5)
         th = pdf.font_size
         for row in data:
+            
             for datum in row:
                 
                 pdf.cell(col_width, th, str(datum), border=1)
@@ -452,6 +451,7 @@ class MyFirstGUI:
             pdf.ln(th)
         pdf.output('out.pdf','F')
         tk.messagebox.showinfo("Sucess","Sucesssfully saved")
+ 
 
 if __name__=="__main__":
     root = tk.Tk()
@@ -459,6 +459,8 @@ if __name__=="__main__":
     
     menu =MyFirstGUI(root,top)
     menu.login()
+    
     root.withdraw()
     root.mainloop()
+    
     
